@@ -7,7 +7,6 @@ from django.utils import timezone
 
 
 class Principal_investigator(models.Model):
-    PI_id = models.CharField(primary_key=True, editable=False, max_length=100)
     p_name = models.CharField(max_length=100)
     P_Dept = models.CharField(max_length=100)
     p_contact = models.CharField(max_length=20)
@@ -16,7 +15,6 @@ class Principal_investigator(models.Model):
 
 
 class Co_Investigator(models.Model):
-    Co_inv_id = models.CharField(max_length=100, primary_key=True, editable=False)
     Co_name = models.CharField(max_length=100)
     Co_designation = models.CharField(max_length=100)
     Co_contact_no = models.CharField(max_length=20)
@@ -24,7 +22,6 @@ class Co_Investigator(models.Model):
 
 
 class collaborations(models.Model):
-    collab_id = models.CharField(primary_key=True, editable=False, max_length=100)
     Institue = models.CharField(max_length=100)
     Name = models.CharField(max_length=100)
     Designation = models.CharField(max_length=100)
@@ -34,7 +31,6 @@ class collaborations(models.Model):
 
 
 class Std_details(models.Model):
-    std_id = models.CharField(primary_key=True, editable=False, max_length=100)
     st_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
     st_contact_no = models.CharField(max_length=100)
@@ -49,7 +45,6 @@ class Std_details(models.Model):
 
 
 class study_design(models.Model):
-    study_design_id = models.CharField(primary_key=True, editable=False, max_length=100)
     case_report = (
         ('O', 'Cohort,Prospective'), ('ER', 'Open-(non blinded)'), ('EN', 'Non-Randomized')
     )
@@ -67,7 +62,6 @@ class study_design(models.Model):
 
 
 class Time_Frame(models.Model):
-    time_frame_id = models.CharField(primary_key=True, editable=False, max_length=100)
     study_coll_period = models.DurationField()
     retro_period = models.DurationField()
     patient_part = models.DurationField()
@@ -76,20 +70,17 @@ class Time_Frame(models.Model):
 
 
 class pat_sel_id(models.Model):
-    pat_sel_id = models.CharField(primary_key=True, editable=False, max_length=100)
     define_pop = models.TextField()
     In_criteria = models.TextField()
     Ex_criteria = models.TextField()
 
 
 class work_up(models.Model):
-    work_up_id = models.CharField(primary_key=True, editable=False, max_length=100)
     clinical = models.TextField()
     Investigations = models.TextField()
 
 
 class Out_funding(models.Model):
-    fund_id = models.CharField(primary_key=True, editable=False, max_length=100)
     fund_name = models.TextField()
     address = models.TextField()
     email = models.EmailField(max_length=100, null=False, blank=False)
@@ -97,7 +88,6 @@ class Out_funding(models.Model):
 
 
 class study_step(models.Model):
-    study_step = models.CharField(primary_key=True, editable=True, max_length=100)
     patient_sel_id = models.ForeignKey(pat_sel_id, on_delete=models.CASCADE)
     inf_consent = (
         ('W', 'Written'), ('T', 'Telephonic'), ('V', 'Waiver'), ('O', 'Other')
@@ -133,14 +123,12 @@ class study_step(models.Model):
 
 
 class expected_comp(models.Model):
-    expected_id = models.CharField(primary_key=True, editable=False, max_length=100)
     data_coll_date = models.DateTimeField()
     data_analysis_date = models.DateTimeField()
     write_up = models.DateTimeField()
 
 
 class clinical_studies(models.Model):
-    clinical_id = models.CharField(primary_key=True, editable=False, max_length=100)
     total_sample_sanctioned = models.IntegerField()
     no_patients_screened = models.IntegerField()
     no_failures = models.IntegerField()
@@ -150,7 +138,6 @@ class clinical_studies(models.Model):
 
 
 class lab_study(models.Model):
-    lab_id = models.CharField(primary_key=True, editable=False, max_length=100)
     nos_sanctioned = models.IntegerField()
     nos_collected = models.IntegerField()
     nos_tested = models.IntegerField()
@@ -159,7 +146,6 @@ class lab_study(models.Model):
 
 
 class paper_presentation(models.Model):
-    pa_id = models.CharField(primary_key=True, editable=False, max_length=100)
     pa_level = (
         (1, 'Local'), (2, 'National'), (3, 'International'),
     )
@@ -175,14 +161,12 @@ class paper_presentation(models.Model):
 
 
 class feedback(models.Model):
-    feed_id = models.CharField(primary_key=True, editable=False, max_length=100)
     study_improved_clin_practice = models.TextField()
     any_other = models.TextField()
     problems_faced = models.TextField()
 
 
 class protocol_amend(models.Model):
-    prot_id = models.CharField(primary_key=True, editable=False, max_length=100)
     has_amended = (
         (1, 'YES'), (2, 'NO')
     )
@@ -191,7 +175,6 @@ class protocol_amend(models.Model):
 
 
 class prog_report(models.Model):
-    progress_id = models.CharField(primary_key=True, editable=False, max_length=100)
     date_of_comencenment = models.DateTimeField()
     exp_date_completion = models.ForeignKey(expected_comp, on_delete=models.CASCADE)
     project_rate = models.TextField()
@@ -210,7 +193,6 @@ class prog_report(models.Model):
 
 
 class comp_report(models.Model):
-    completion_id = models.CharField(primary_key=True, editable=False, max_length=100)
     p_id = models.ForeignKey(Principal_investigator, on_delete=models.CASCADE)
     ci_id = models.ForeignKey(Co_Investigator, on_delete=models.CASCADE)
     st_id = models.ForeignKey(Std_details, on_delete=models.CASCADE)
@@ -224,7 +206,6 @@ class comp_report(models.Model):
 
 
 class project_details(models.Model):
-    project_id = models.CharField(primary_key=True, editable=False, max_length=100)
     project_code_no = models.CharField(editable=False, max_length=100)
     PI_id = models.ForeignKey(Principal_investigator, on_delete=models.CASCADE)
     Co_id = models.ForeignKey(Co_Investigator, on_delete=models.CASCADE)
@@ -249,7 +230,6 @@ class project_details(models.Model):
 
 
 class sec_details(models.Model):
-    sec_id = models.CharField(primary_key=True, editable=False, max_length=100)
     username = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)
@@ -258,7 +238,6 @@ class sec_details(models.Model):
 
 
 class Director_details(models.Model):
-    dir_id = models.CharField(primary_key=True, editable=False, max_length=100)
     name = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)
