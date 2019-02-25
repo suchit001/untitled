@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Sign Up{% endblock %}
+
+{% block calendar %}
+  {% load bootstrap3 %}       {# import bootstrap4/bootstrap3 #}
+  {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+  {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+  {% block extrahead %}       {# Extra Resources Start #}
+  {{ form.media }}            {# Form required JS and CSS #}
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <h1 align="center">Sign up</h1>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form">
+            {% for field in form %}
+
+            <div class="tag">
+                {{ field.label_tag}}
+
+            </div>
+            <div class="field">
+                {{ field }}
+                {% if field.help_text %}
+                  <small style="color: grey">{{ field.help_text|safe }}</small><br><br>
+                {% endif %}
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+          <br>
+        <button type="submit">Sign up</button><br><br>
+      <a href="{% url 'login' %}">Login Instead?</a><br>
+        </div>
+    </form>
+</div>
+{% endblock %}

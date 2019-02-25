@@ -1,0 +1,19 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% block mainpage %}
+<div id="page-wrapper" align="center">
+  <div id="page-inner">
+      <h1>New post</h1>
+      <form method="post">
+        {% csrf_token %}
+          Are you sure you want to delete?
+          <br>
+          <button class="btn btn-danger">Yes</button>
+          <a href="{% url 'dashboard:posts' %}" class="btn btn-primary">No</a>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

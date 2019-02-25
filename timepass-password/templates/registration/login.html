@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <h2 align="center">Login</h2>
+  <form method="post" class="register-form">
+    {% csrf_token %}
+
+
+      <div class="form">
+          {% if err %}
+                {{ err }}
+          {% endif %}
+          {% if form.errors %}
+           <p> Please enter a correct username and password. Note that both fields may be case-sensitive.</p><br>
+          {% endif %}
+        {% for field in form %}
+           <div class="tag">
+           {{ field.label_tag}}
+             </div>
+             <div class="field">
+
+            {{ field }}
+            {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text|safe }}</small><br><br>
+        {% endif %}
+      </div>
+      {% endfor %}
+      <button type="submit">Login</button><br><br>
+
+      <a href="{% url 'users:ForgetPassword' %}">Forgot Password?</a><br>
+      <a href="{% url 'users:signup' %}"> Sign Up</a><br>
+      <a href="{% url 'admin:index' %}">Admin Login</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

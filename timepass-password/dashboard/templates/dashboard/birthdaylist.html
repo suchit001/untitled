@@ -1,0 +1,52 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Birthday List{% endblock %}
+
+
+{% block mainpage %}
+
+
+<div id="page-wrapper">
+  <div id="page-inner">
+      <hr>
+  <h2>BIRTHDAY LIST</h2>
+      <hr>
+
+        {% for keys,values in month.items %}
+        <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <a style="text-decoration:None" data-toggle="collapse" href="#collapse{{ forloop.counter }}">
+                <h4 class="panel-title">
+
+                        {{ values }}
+
+                </h4>
+                      </a>
+              </div>
+                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+            {% for user in users %}
+                {% if user.birth_date.month == keys %}
+                        <h5>{{ user.username }} - {{ user.birth_date }}</h5>
+                {% endif %}
+            {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block birthdaylistactive %}
+                    <li class="active-link">
+                      <a href="{% url 'dashboard:birthday_list' %}"><i class="fas fa-birthday-cake"></i>Birthday List</a>
+                    </li>
+{% endblock %}

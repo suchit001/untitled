@@ -1,0 +1,62 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block mainpage %}
+<div id="page-wrapper" >
+            <div id="page-inner">
+                <hr>
+                <h2>Profile:</h2>
+                <hr>
+                 <a href="{% url 'dashboard:profileEdit' user.id %}"><button class="w3-right" type="button"><i class="fa fa-edit"></i>    Edit    </button></a>
+<br><br>
+                <table class="table table-hover table-striped">
+                    <tbody>
+
+                        <tr>
+                            <td>Username</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Email</td>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{user.gender}}</td>
+                        </tr>
+                        <tr>
+                            <td>Birthday</td>
+                            <td>{{user.birth_date}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Contact Number</td>
+                            <td>{{user.contact_number}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Emergency Contact</td>
+                            <td>{{user.emergency_contact_name}}-{{user.emergency_contact_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Blood Group</td>
+                            <td>{{user.blood_group}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{user.address}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+</div>
+{% endblock %}
+
+{% block profileactive %}
+                    <li class="active-link">
+                        <a href="{% url 'dashboard:profile'%}"><i class="fa fa-user "></i>Profile</a>
+                    </li>
+{% endblock %}

@@ -1,0 +1,39 @@
+
+
+
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Documents{% endblock %}
+
+
+{% block mainpage %}
+
+
+<div id="page-wrapper">
+  <div id="page-inner">
+      <hr>
+  <h2>Documents</h2>
+      <hr>
+
+      {% for docs in object_list %}
+      <h4>
+
+          <a href="{{docs.file.url}}">{{docs.name}}</a>
+
+      </h4>
+      {% endfor %}
+
+
+
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block documents %}
+                    <li class="active-link">
+                      <a href="{% url 'dashboard:documents' %}"><i class="fas fa-file-alt"></i>Documents</a>
+                    </li>
+{% endblock %}

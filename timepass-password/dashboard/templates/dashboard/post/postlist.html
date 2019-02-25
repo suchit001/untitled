@@ -1,0 +1,59 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Posts{% endblock %}
+{%load staticfiles%}
+{% block mainpage %}
+
+<div id="page-wrapper">
+  <div id="page-inner">
+      <hr>
+      <h2>
+          Posts List
+      </h2>
+      <hr>
+            <a href="{% url 'dashboard:new_posts' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Post</button></a>
+<br>
+<ul>
+    {% for post in object_list %}
+
+    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <span class="w3-right w3-opacity">{{post.date}}<br>{{post.author.name}}
+            {% if post.author == user %}
+            <a href="{% url 'dashboard:delete' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
+                Delete
+            </a>
+            {% endif %}
+        </span>
+        <h4>{{ post.title }}</h4>
+<br>
+        <hr>
+        <p>{{ post.text|urlize|linebreaks}}</p>
+      </div>
+
+    {% endfor %}
+</ul>
+<span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+      </span><br>
+
+
+  {% if object_list.has_previous %}
+    <a href="?page=1">First</a>
+      <a href="?page={{ object_list.previous_page_number }}" class="previous round"><span class="prevarrow">&#8249;</span></a>
+  {% endif %}
+
+      {% if object_list.has_next %}
+      <a href="?page={{ object_list.next_page_number }}" class="next round"><span class="nextarrow">&#8250;</span></a>
+      <a href="?page={{ object_list.paginator.num_pages }}">Last </a>
+
+      {% endif %}
+</div>
+</div>
+{% endblock %}
+
+{% block postactive %}
+                    <li class="active-link">
+                      <a href="{% url 'dashboard:posts' %}"><i class="fas fa-bars "></i>Post</a>
+                    </li>
+{% endblock %}

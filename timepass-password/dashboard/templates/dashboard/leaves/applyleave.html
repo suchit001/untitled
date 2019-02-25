@@ -1,0 +1,35 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Leaves{% endblock %}
+
+{% block calendar %}
+  {% load bootstrap3 %}       {# import bootstrap4/bootstrap3 #}
+  {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+  {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+  {% block extrahead %}       {# Extra Resources Start #}
+  {{ form.media }}            {# Form required JS and CSS #}
+  {% endblock %}
+{% endblock %}
+
+
+
+{% block mainpage %}
+
+<div id="page-wrapper">
+  <div id="page-inner">
+  <h2>Leave Application</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Post</button>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block approval %}
+                    <li class="active-link">
+                        <a href="{% url 'dashboard:approval' %}"><i class="fa fa-edit "></i>Leaves </a>
+                    </li>
+                    {% endblock %}

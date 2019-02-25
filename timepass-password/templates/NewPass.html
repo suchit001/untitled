@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <h2 align="center">Password Recovery</h2>
+  <form method="post" class="register-form">
+    {% csrf_token %}
+      <div class="form">
+          {% if error_message %}
+            {{ error_message }}<hr>
+          {% endif %}
+
+          <div class="tag">
+               <label for="pass1">
+                    New Password:
+                </label>
+                 </div>
+             <div class="field">
+                <input type="password" name="pass1">
+             </div>
+          <div class="tag">
+               <label for="pass2">
+                    Confirmation:
+                </label>
+                 </div>
+             <div class="field">
+                <input type="password" name="pass2">
+             </div>
+          <br>
+      <button type="submit">Confirm!</button><br><br>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+

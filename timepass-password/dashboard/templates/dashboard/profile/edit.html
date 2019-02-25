@@ -1,0 +1,26 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block mainpage %}
+
+
+<div id="page-wrapper" >
+            <div id="page-inner">
+                <hr>
+                <h2>Profile:</h2>
+                <hr>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-success">Submit</button>
+                    </form>
+            </div>
+</div>
+{% endblock %}
+
+{% block profileactive %}
+                    <li class="active-link">
+                        <a href="{% url 'dashboard:profile'%}"><i class="fa fa-user "></i>Profile</a>
+                    </li>
+{% endblock %}

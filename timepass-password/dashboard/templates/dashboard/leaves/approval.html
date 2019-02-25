@@ -1,0 +1,62 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Leaves{% endblock %}
+
+{% block mainpage %}
+
+<div id="page-wrapper">
+  <div id="page-inner">
+      <br>
+
+      <a href="{% url 'dashboard:applyleave' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Leave</button></a>
+      <h2>
+          Leaves
+      </h2>
+<ul>
+ {% for post in leaves %}
+    <div class="w3-container w3-card w3-white w3-round w3-margin">
+        <span class="w3-right w3-opacity">{{post.created_date}}</span>
+        <br><hr>
+        <h4>Reason:</h4><p>{{ post.reasons }}</p><hr>
+        <h4>Subject:</h4><p>{{ post.subject }}</p><hr>
+        <h4>Text:</h4><p>{{ post.text}}</p><hr>
+
+        <h4>Duration:</h4><p>{{ post.from_date }} - {{post.to_date}}</p><hr>
+        <h4>Approval:</h4>
+        <p>{{ post.approval }}</p>
+
+      </div><br>
+
+    {% endfor %}
+</ul>
+
+       <span class="current">
+            Page {{ leaves.number }} of {{ leaves.paginator.num_pages }}
+      </span><br>
+
+
+  {% if leaves.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ leaves.previous_page_number }}" class="previous round"><span class="prevarrow">&#8249;</span></a>
+  {% endif %}
+
+      {% if leaves.has_next %}
+      <a href="?page={{ leaves.next_page_number }}" class="next round"><span class="nextarrow">&#8250;</span></a>
+      <a href="?page={{ leaves.paginator.num_pages }}">Last </a>
+
+      {% endif %}
+
+
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+{% block approval %}
+                    <li class="active-link">
+                        <a href="{% url 'dashboard:approval' %}"><i class="fa fa-edit "></i>Leaves </a>
+                    </li>
+                    {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Announcements{% endblock %}
+
+{% block calendar %}
+  {% load bootstrap3 %}       {# import bootstrap4/bootstrap3 #}
+  {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+  {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+  {% block extrahead %}       {# Extra Resources Start #}
+  {{ form.media }}            {# Form required JS and CSS #}
+  {% endblock %}
+{% endblock %}
+
+
+
+{% block mainpage %}
+
+<div id="page-wrapper">
+  <div id="page-inner">
+  <h2>Announcement Apply</h2>
+    <form method="post" enctype="multipart/form-data" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Post</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

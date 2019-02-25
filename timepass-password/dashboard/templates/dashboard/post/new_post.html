@@ -1,0 +1,23 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block mainpage %}
+<div id="page-wrapper">
+  <div id="page-inner">
+
+    <h1>New post</h1>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-primary">Save</button>
+        </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block postactive %}
+                    <li class="active-link">
+                      <a href="{% url 'dashboard:posts' %}"><i class="fas fa-bars "></i>Post</a>
+                    </li>
+{% endblock %}
